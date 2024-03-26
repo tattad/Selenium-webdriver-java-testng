@@ -26,17 +26,18 @@ public class Topic_01_Check_Environment {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        driver.get("https://www.faceboook.com/");
     }
 
-    @Test
-    public void TC_01(){
+//    @Test
+//    public void TC_01(){
+//
+//    }
 
-    }
-
-    @Test
-    public void TC_02(){
-
-    }
+//    @Test
+//    public void TC_02(){
+//
+//    }
 
     @Test
     public void TC_01_Url() {
