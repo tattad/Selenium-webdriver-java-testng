@@ -1,5 +1,6 @@
 package webdriver;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
@@ -57,46 +58,90 @@ public class Topic_02_Selenium_Locator {
 
     @Test
     public void TC_01_ID(){
-//        driver.findElement(By.);
+        //Tìm element có id là FirstName
+        driver.findElement(By.id("FirstName")).sendKeys("Dat");
+//        System.out.println(driver.findElement(By.id("FirstName")));
     }
 
     @Test
     public void TC_02_Class(){
-
+        driver.findElement(By.className("header-logo"));
     }
 
     @Test
     public void TC_03_Name(){
-
+        driver.findElement(By.name("DateOfBirthDay"));
     }
 
     @Test
     public void TC_04_Tagname(){
-
+        driver.findElements(By.tagName("input"));
     }
 
     @Test
     public void TC_05_LinkText(){
-
+        //độ chính xác tuyệt đối
+        driver.findElement(By.linkText("Shipping & returns"));
     }
 
     @Test
     public void TC_06_Partial_LinkText(){
-
+        //độ chính xác không cao
+        driver.findElement(By.partialLinkText("for vendor"));
     }
 
     @Test
     public void TC_07_Css(){
+        //Css với ID
+        driver.findElement(By.cssSelector("input[id='FirstName']"));
+        driver.findElement(By.cssSelector("input#FirstName"));
+        driver.findElement(By.cssSelector("#FirstName"));
 
+        //Css với class
+        driver.findElement(By.cssSelector("div[class='page-title']"));
+        driver.findElement(By.cssSelector("div.page-title"));
+        driver.findElement(By.cssSelector(".page-title"));
+
+        //Css với name
+        driver.findElement(By.cssSelector("input[name='FirstName']"));
+
+        //Css với tagname
+        driver.findElement(By.cssSelector("input"));
+
+        //Css với link
+        driver.findElement(By.cssSelector("a[href='/customer/addresses']"));
+
+        //Css với partial link
+        driver.findElement(By.cssSelector("a[href*='addresses']")); //lấy giữa
+//        driver.findElement(By.cssSelector("a[href^='addresses']")); //lấy đầu
+//        driver.findElement(By.cssSelector("a[href$='addresses']")); // lấy đuôi
     }
 
     @Test
     public void TC_08_XPath(){
+        //XPath với ID
+        driver.findElement(By.xpath("//input[@id='FirstName']"));
 
+        //XPath với class
+        driver.findElement(By.xpath("//div[@class='page-title']"));
+
+        //XPath với name
+        driver.findElement(By.xpath("//input[@name='FirstName']"));
+
+        //XPath với tagname
+        driver.findElement(By.xpath("//input"));
+
+        //XPath với link
+        driver.findElement(By.xpath("//a[@href='/customer/addresses']"));
+        driver.findElement(By.xpath("//a[text()='Addresses']"));
+
+        //XPath với partial link
+        driver.findElement(By.xpath("//a[contains(@href,'addresses')]"));
+        driver.findElement(By.xpath("//a[contains(text(),'Addresses')]"));
     }
 
     @AfterClass
     public void afterClass() {
-        driver.quit();
+//        driver.quit();
     }
 }
