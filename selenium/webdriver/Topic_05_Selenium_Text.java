@@ -55,7 +55,6 @@ public class Topic_05_Selenium_Text {
 
         String concatText = driver.findElement(By.xpath("//span[@class='concat']")).getText();
         Assert.assertEquals(concatText,"Hello\"John\",What's happened?");
-
     }
 
     @Test

@@ -22,5 +22,8 @@ public class Topic_02_And_Or {
         member01 = true;
         member02 = false;
         System.out.println("Result = " + (member01 || member02));
+
+        //Example (http://live.techpanda.org/index.php/customer/account/login/)
+        //input=[@id='pass or @id='email']
     }
 }
