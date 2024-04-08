@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class Topic_05_Selenium_Text {
+public class Demo_05_Selenium_Text {
 
     WebDriver driver;
     String projectPath = System.getProperty("user.dir");
