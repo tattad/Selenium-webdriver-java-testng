@@ -58,7 +58,6 @@ public class demoPenguin_Win {
         driver.findElement(By.xpath("//a[@title='Demo (NFHU)']")).click();
 
 //        driver.findElement(By.xpath("//nz-select-placeholder[text()=' Select Account Name ']")).click();
-
     }
 
      @AfterClass
