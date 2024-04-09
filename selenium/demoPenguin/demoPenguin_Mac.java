@@ -55,7 +55,7 @@ public class demoPenguin_Mac {
 
         WebElement element = driver.findElement(By.xpath("//a[@title='Demo (NFHU)']"));
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",element);
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         driver.findElement(By.xpath("//a[@title='Demo (NFHU)']")).click();
 

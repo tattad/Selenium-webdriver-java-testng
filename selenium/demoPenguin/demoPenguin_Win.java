@@ -60,7 +60,7 @@ public class demoPenguin_Win {
 //        driver.findElement(By.xpath("//nz-select-placeholder[text()=' Select Account Name ']")).click();
     }
 
-     @AfterClass
+    @AfterClass
     public void afterClass() {
 //        driver.quit();
     }
