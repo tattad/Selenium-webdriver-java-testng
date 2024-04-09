@@ -1,8 +1,12 @@
 package demoPenguin;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -37,7 +41,7 @@ public class demoPenguin_Win {
     }
 
     @Test
-    public void Login_02_Submit_A_Order() {
+    public void Login_02_Submit_A_Order() throws InterruptedException {
         driver.get("https://penguin.stage-ap.apps.bsci.com/");
 
         //Click on Non BSCS Account
@@ -51,13 +55,42 @@ public class demoPenguin_Win {
         //Click Login button
         driver.findElement(By.xpath("//span[contains(text(),'Log in')]")).click();
 
+        // Chon country
 //        driver.findElement(By.xpath("//span[text()='ANZ']")).click();
+
         //Chọn Order menu
         driver.findElement(By.xpath("//span[text()='Order']")).click();
 
+        //Cho 3s
+        WebElement element = driver.findElement(By.xpath("//a[@title='Demo (NFHU)']"));
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);",element);
+        Thread.sleep(3000);
+
         driver.findElement(By.xpath("//a[@title='Demo (NFHU)']")).click();
 
-//        driver.findElement(By.xpath("//nz-select-placeholder[text()=' Select Account Name ']")).click();
+        //Expand dropdown
+        WebElement customerDropdown = driver.findElement(By.xpath("//nz-select-placeholder[contains(text(),'Select Account Name')]"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(customerDropdown).click().perform();
+
+        //Chon customer
+        driver.findElement(By.xpath("//nz-option-item[@title='585434 - ABBIE HANS']")).click();
+        Thread.sleep(3000);
+
+        //Click Next button
+        driver.findElement(By.xpath("//span[contains(text(),' Next ')]")).click();
+
+        //Chon Division dropdown
+        driver.findElement(By.xpath("//label[contains(text(),'Division')]/following-sibling::app-choose-division")).click();
+
+        //Chon Divison IC
+        driver.findElement(By.xpath("//div[text()='IC']")).click();
+
+        //Nhap UPN
+        driver.findElement(By.xpath("//input[@placeholder='Enter UPN/Name']")).click();
+        driver.findElement(By.xpath("//input[@placeholder='Enter UPN/Name']")).sendKeys("H74939309020");
+
+        //
     }
 
     @AfterClass
