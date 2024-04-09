@@ -1,4 +1,4 @@
-package demo;
+package demoPenguin;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -6,14 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class Penguin {
+public class demoPenguin_Mac {
 
     WebDriver driver;
     String projectPath = System.getProperty("user.dir");
