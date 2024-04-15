@@ -18,7 +18,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Topic_06_WebBrowser_Commands {
+public class Topic_06_WebBrowser_Commands_01 {
     //Các câu lệnh để thao tác vs browser
     //driver.
     WebDriver driver;
