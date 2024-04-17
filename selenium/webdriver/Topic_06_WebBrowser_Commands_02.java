@@ -82,8 +82,12 @@ public class Topic_06_WebBrowser_Commands_02 {
         driver.findElement(By.xpath("//div[@class='footer']//a[@title='My Account']")).click();
         sleepInSecond(3);
 
-        Assert.assertEquals(driver.getPageSource(),"");
+        Assert.assertTrue(driver.getPageSource().contains("Login or Create an Account"));
 
+        driver.findElement(By.xpath("//a[@title='Create an Account']")).click();
+        sleepInSecond(3);
+
+        Assert.assertTrue(driver.getPageSource().contains("Create an Account"));
     }
 
     @AfterClass
