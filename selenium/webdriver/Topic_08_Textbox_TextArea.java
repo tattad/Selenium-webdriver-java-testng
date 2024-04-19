@@ -88,10 +88,10 @@ public class Topic_08_Textbox_TextArea {
         sleepInSecond(2);
 
         String firstName = "Hom Nay",
-               middleName = "An",
-               lastName = "Gi",
-               emailAddres = getEmailAddress(),
-               password = "123456789";
+                middleName = "An",
+                lastName = "Gi",
+                emailAddres = getEmailAddress(),
+                password = "123456789";
         String fullName = firstName + " " + middleName + " " + lastName;
 
         driver.findElement(By.id("firstname")).sendKeys(firstName);
@@ -104,8 +104,8 @@ public class Topic_08_Textbox_TextArea {
         driver.findElement(By.xpath("//button[@title='Register']")).click();
         sleepInSecond(2);
 
-        Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']")).getText(),"Thank you for registering with Main Website Store.");
-        Assert.assertEquals(driver.findElement(By.xpath("//p[@class='hello']")).getText(),"Hello, "+ fullName + "!");
+        Assert.assertEquals(driver.findElement(By.xpath("//li[@class='success-msg']")).getText(), "Thank you for registering with Main Website Store.");
+        Assert.assertEquals(driver.findElement(By.xpath("//p[@class='hello']")).getText(), "Hello, " + fullName + "!");
 
         String contactInfo = driver.findElement(By.xpath("//h3[text()='Contact Information']//parent::div//following-sibling::div[@class='box-content']")).getText();
         Assert.assertTrue(contactInfo.contains(fullName));
@@ -126,7 +126,7 @@ public class Topic_08_Textbox_TextArea {
 
         driver.findElement(By.xpath("//button[@title='Login']")).click();
 
-        Assert.assertEquals(driver.findElement(By.xpath("//p[@class='hello']")).getText(),"Hello, "+ fullName + "!");
+        Assert.assertEquals(driver.findElement(By.xpath("//p[@class='hello']")).getText(), "Hello, " + fullName + "!");
 
         contactInfo = driver.findElement(By.xpath("//h3[text()='Contact Information']//parent::div//following-sibling::div[@class='box-content']")).getText();
         Assert.assertTrue(contactInfo.contains(fullName));
@@ -136,7 +136,6 @@ public class Topic_08_Textbox_TextArea {
         driver.findElement(By.xpath("//a[text()='Account Information']")).click();
         sleepInSecond(2);
 
-//        driver.findElement(By.xpath("//input[@class='firstname']")).getAttribute("value");
         Assert.assertEquals(driver.findElement(By.id("firstname")).getAttribute("value"), firstName);
         Assert.assertEquals(driver.findElement(By.id("middlename")).getAttribute("value"), middleName);
         Assert.assertEquals(driver.findElement(By.id("lastname")).getAttribute("value"), lastName);
@@ -170,6 +169,6 @@ public class Topic_08_Textbox_TextArea {
 
     public String getEmailAddress() {
         Random rand = new Random();
-        return  "logintest" + rand.nextInt(9999999) + "@gmail.com";
+        return "logintest" + rand.nextInt(9999999) + "@gmail.com";
     }
 }
