@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -36,11 +37,11 @@ public class Topic_10_Custom_Dropdown {
     }
 
     @Test
-    public void TC_01() {
+    public void TC_01_JQuery() {
         driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
         //1 - Click vào 1 thẻ để cho nó xổ hết ra các item bên trong dropdown ra
-        driver.findElement(By.id("number-button")).click();
-        sleepInSecond(2);
+//        driver.findElement(By.id("number-button")).click();
+//        sleepInSecond(2);
 
         //2.1 - Nó sẽ xổ ra chứa hết tất cả các item
         //2.2 - Nó sẽ xổ ra nhưng chỉ chứa 1 phần và đang load thêm
@@ -50,20 +51,37 @@ public class Topic_10_Custom_Dropdown {
 //        explicitWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("")));
 
         //Xuất hiện đầy đủ trong HTML
-        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//ul[@id='number-menu']//div")));
+//        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//ul[@id='number-menu']//div")));
 
-        List<WebElement> allItems = driver.findElements(By.xpath("//ul[@id='number-menu']//div"));
-
-        for (WebElement item : allItems) {
-            String textItem = item.getText();
-            if (textItem.equals("8")) {
-                item.click();
-                break;
-            }
-        }
+//        List<WebElement> allItems = driver.findElements(By.xpath("//ul[@id='number-menu']//div"));
+//        for (WebElement item : allItems) {
+//            String textItem = item.getText();
+//            if (textItem.equals("8")) {
+//                item.click();
+//                break;
+//            }
+//        }
         //3.1 - Nếu như item cần chọn nó hiển thị thì click vào
         //3.2 - Nếu như item cần chọn nằm bên dưới thì 1 số trường hợp cần scroll xuống để hiển thị lên rồi mới chọn
         //4 - Trước khi click cần kiểm tra nếu như text của item bằng với item cần chọn thì click vào
+
+        //Select a speed
+        selectItemsInDropdown("speed-button", "//ul[@id='speed-menu']//div", "Medium");
+        sleepInSecond(1);
+        //Select a file
+        selectItemsInDropdown("files-button", "//ul[@id='files-menu']//div", "jQuery.js");
+        sleepInSecond(1);
+        //Select a numer
+        selectItemsInDropdown("number-button", "//ul[@id='number-menu']//div", "15");
+        sleepInSecond(1);
+        //Select a title
+        selectItemsInDropdown("salutation-button", "//ul[@id='salutation-menu']//div", "Prof.");
+        sleepInSecond(1);
+
+        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='speed-button']//span[@class='ui-selectmenu-text']")).getText(),"Medium");
+        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='files-button']//span[@class='ui-selectmenu-text']")).getText(),"jQuery.js");
+        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='number-button']//span[@class='ui-selectmenu-text']")).getText(),"15");
+        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='salutation-button']//span[@class='ui-selectmenu-text']")).getText(),"Prof.");
     }
 
     @Test
@@ -81,6 +99,19 @@ public class Topic_10_Custom_Dropdown {
             Thread.sleep(timeInSecond * 1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void selectItemsInDropdown(String dropdownList, String dropdownItems, String itemTextExpected) {
+        driver.findElement(By.id(dropdownList)).click(); //"number-button"
+        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(dropdownItems)));//"//ul[@id='number-menu']//div"
+        List<WebElement> allItems = driver.findElements(By.xpath(dropdownItems)); //"//ul[@id='number-menu']//div"
+        for (WebElement item : allItems) {
+            String textItem = item.getText();
+            if (textItem.equals(itemTextExpected)) {
+                item.click();
+                break;
+            }
         }
     }
 }
