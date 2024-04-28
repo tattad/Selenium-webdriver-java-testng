@@ -36,7 +36,7 @@ public class Topic_10_Custom_Dropdown {
         driver.manage().window().maximize();
     }
 
-    @Test
+    //    @Test
     public void TC_01_JQuery() {
         driver.get("https://jqueryui.com/resources/demos/selectmenu/default.html");
         //1 - Click vào 1 thẻ để cho nó xổ hết ra các item bên trong dropdown ra
@@ -66,27 +66,53 @@ public class Topic_10_Custom_Dropdown {
         //4 - Trước khi click cần kiểm tra nếu như text của item bằng với item cần chọn thì click vào
 
         //Select a speed
-        selectItemsInDropdown("speed-button", "//ul[@id='speed-menu']//div", "Medium");
+        selectItemsInDropdown("//span[@id='speed-button']", "//ul[@id='speed-menu']//div", "Medium");
         sleepInSecond(1);
         //Select a file
-        selectItemsInDropdown("files-button", "//ul[@id='files-menu']//div", "jQuery.js");
+        selectItemsInDropdown("//span[@id='files-button']", "//ul[@id='files-menu']//div", "jQuery.js");
         sleepInSecond(1);
         //Select a numer
-        selectItemsInDropdown("number-button", "//ul[@id='number-menu']//div", "15");
+        selectItemsInDropdown("//span[@id='number-button']", "//ul[@id='number-menu']//div", "15");
         sleepInSecond(1);
         //Select a title
-        selectItemsInDropdown("salutation-button", "//ul[@id='salutation-menu']//div", "Prof.");
+        selectItemsInDropdown("//span[@id='salutation-button']", "//ul[@id='salutation-menu']//div", "Prof.");
         sleepInSecond(1);
 
-        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='speed-button']//span[@class='ui-selectmenu-text']")).getText(),"Medium");
-        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='files-button']//span[@class='ui-selectmenu-text']")).getText(),"jQuery.js");
-        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='number-button']//span[@class='ui-selectmenu-text']")).getText(),"15");
-        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='salutation-button']//span[@class='ui-selectmenu-text']")).getText(),"Prof.");
+        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='speed-button']//span[@class='ui-selectmenu-text']")).getText(), "Medium");
+        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='files-button']//span[@class='ui-selectmenu-text']")).getText(), "jQuery.js");
+        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='number-button']//span[@class='ui-selectmenu-text']")).getText(), "15");
+        Assert.assertEquals(driver.findElement(By.xpath("//span[@id='salutation-button']//span[@class='ui-selectmenu-text']")).getText(), "Prof.");
+    }
+
+    //    @Test
+    public void TC_02_ReactJS() {
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+
+        selectItemsInDropdown("//div[@id='root']", "//span[@class='text']", "Christian");
+        sleepInSecond(1);
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@class='divider text']")).getText(), "Christian");
+    }
+
+    //    @Test
+    public void TC_03_VueJS() {
+        driver.get("https://mikerodham.github.io/vue-dropdowns/");
+
+        selectItemsInDropdown("//li[@class='dropdown-toggle']", "//ul[@class='dropdown-menu']//a", "Third Option");
+        sleepInSecond(1);
+        Assert.assertEquals(driver.findElement(By.xpath("//li[@class='dropdown-toggle']")).getText(), "Third Option");
     }
 
     @Test
-    public void TC_02() {
+    public void TC_04_Editable() {
+        driver.get("https://react.semantic-ui.com/maximize/dropdown-example-search-selection/");
 
+        selectItemsInEditableDropdown("//input[@class='search']", "//div[@class='visible menu transition']//span", "Belgium");
+        sleepInSecond(1);
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@class='divider text']")).getText(), "Belgium");
+
+        selectItemsInEditableDropdown("//input[@class='search']", "//div[@class='visible menu transition']//span", "Azerbaijan");
+        sleepInSecond(1);
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@class='divider text']")).getText(), "Azerbaijan");
     }
 
     @AfterClass
@@ -103,7 +129,23 @@ public class Topic_10_Custom_Dropdown {
     }
 
     public void selectItemsInDropdown(String dropdownList, String dropdownItems, String itemTextExpected) {
-        driver.findElement(By.id(dropdownList)).click(); //"number-button"
+        driver.findElement(By.xpath(dropdownList)).click(); //"number-button"
+        explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(dropdownItems)));//"//ul[@id='number-menu']//div"
+        List<WebElement> allItems = driver.findElements(By.xpath(dropdownItems)); //"//ul[@id='number-menu']//div"
+        for (WebElement item : allItems) {
+            String textItem = item.getText();
+            if (textItem.equals(itemTextExpected)) {
+                item.click();
+                break;
+            }
+        }
+    }
+
+    public void selectItemsInEditableDropdown(String dropdownList, String dropdownItems, String itemTextExpected) {
+        driver.findElement(By.xpath(dropdownList)).clear();
+        driver.findElement(By.xpath(dropdownList)).sendKeys(itemTextExpected);
+        sleepInSecond(1);
+
         explicitWait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath(dropdownItems)));//"//ul[@id='number-menu']//div"
         List<WebElement> allItems = driver.findElements(By.xpath(dropdownItems)); //"//ul[@id='number-menu']//div"
         for (WebElement item : allItems) {
