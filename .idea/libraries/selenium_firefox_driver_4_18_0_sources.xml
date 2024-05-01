@@ -3,7 +3,7 @@
     <CLASSES />
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/Library/selenium-firefox-driver-4.18.0-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/selenium-firefox-driver-4.18.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

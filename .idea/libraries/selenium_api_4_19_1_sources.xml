@@ -3,7 +3,7 @@
     <CLASSES />
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$PROJECT_DIR$/Library/selenium-api-4.19.1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Libraries/selenium-api-4.19.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
