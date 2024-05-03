@@ -145,7 +145,13 @@ public class Topic_14_Actions {
     public void TC_05() {
         driver.get("https://automationfc.github.io/jquery-selectable/");
 
+        List<WebElement> numbers = driver.findElements(By.xpath("//li[contains(@class,'ui-state-default')]"));
 
+        actions.click(numbers.get(0))
+                .click(numbers.get(2))
+                .click(numbers.get(5))
+                .click(numbers.get(10))
+                .perform();
     }
 
     @Test
@@ -186,12 +192,17 @@ public class Topic_14_Actions {
                 copyOption = driver.findElement(By.xpath("//li[contains(@class,'context-menu-icon-copy')]")),
                 deleteOption = driver.findElement(By.xpath("//li[contains(@class,'context-menu-icon-delete')]")),
                 quitOption = driver.findElement(By.xpath("//li[contains(@class,'context-menu-icon-quit')]")),
-                rightClickButton = driver.findElement(By.xpath("//span[text()='right click me']"));
+                rightClickMe = driver.findElement(By.xpath("//span[text()='right click me']"));
 
         //Chưa click chuột phải thì nó đang chưa hiển thị (invisible)
         Assert.assertFalse(pasteOption.isDisplayed());
+        Assert.assertFalse(cutOption.isDisplayed());
+        Assert.assertFalse(editOption.isDisplayed());
+        Assert.assertFalse(copyOption.isDisplayed());
+        Assert.assertFalse(deleteOption.isDisplayed());
+        Assert.assertFalse(quitOption.isDisplayed());
 
-        actions.contextClick(rightClickButton).perform();
+        actions.contextClick(rightClickMe).perform();
         sleepInSecond(2);
 
         Assert.assertTrue(pasteOption.isDisplayed());
@@ -208,7 +219,7 @@ public class Topic_14_Actions {
         Assert.assertFalse(pasteOption.isDisplayed());
 
         //Edit
-        actions.contextClick(rightClickButton).perform();
+        actions.contextClick(rightClickMe).perform();
         sleepInSecond(1);
         Assert.assertTrue(editOption.isDisplayed());
         actions.moveToElement(editOption).perform();
@@ -220,9 +231,44 @@ public class Topic_14_Actions {
         Assert.assertFalse(editOption.isDisplayed());
 
         //Cut
+        actions.contextClick(rightClickMe).perform();
+        Assert.assertTrue(cutOption.isDisplayed());
+        actions.moveToElement(cutOption).perform();
+        Assert.assertTrue(driver.findElement(By.xpath("//li[contains(@class,'context-menu-icon-cut context-menu-hover context-menu-visible')]")).isDisplayed());
+        actions.click(cutOption).perform();
+        driver.switchTo().alert().accept();
+        sleepInSecond(1);
+        Assert.assertFalse(cutOption.isDisplayed());
+
         //Copy
+        actions.contextClick(rightClickMe).perform();
+        Assert.assertTrue(copyOption.isDisplayed());
+        actions.moveToElement(copyOption).perform();
+        Assert.assertTrue(driver.findElement(By.xpath("//li[contains(@class,'context-menu-icon-copy context-menu-hover context-menu-visible')]")).isDisplayed());
+        actions.click(copyOption).perform();
+        driver.switchTo().alert().accept();
+        sleepInSecond(1);
+        Assert.assertFalse(copyOption.isDisplayed());
+
         //Delete
+        actions.contextClick(rightClickMe).perform();
+        Assert.assertTrue(deleteOption.isDisplayed());
+        actions.moveToElement(deleteOption).perform();
+        Assert.assertTrue(driver.findElement(By.xpath("//li[contains(@class,'context-menu-icon-delete context-menu-hover context-menu-visible')]")).isDisplayed());
+        actions.click(deleteOption).perform();
+        driver.switchTo().alert().accept();
+        sleepInSecond(1);
+        Assert.assertFalse(deleteOption.isDisplayed());
+
         //Quit
+        actions.contextClick(rightClickMe).perform();
+        Assert.assertTrue(quitOption.isDisplayed());
+        actions.moveToElement(quitOption).perform();
+        Assert.assertTrue(driver.findElement(By.xpath("//li[contains(@class,'context-menu-icon-quit context-menu-hover context-menu-visible')]")).isDisplayed());
+        actions.click(quitOption).perform();
+        driver.switchTo().alert().accept();
+        sleepInSecond(1);
+        Assert.assertFalse(quitOption.isDisplayed());
     }
 
     @Test
@@ -320,7 +366,7 @@ public class Topic_14_Actions {
 
     @AfterClass
     public void afterClass() {
-//        driver.quit();
+        driver.quit();
     }
 
     public void sleepInSecond(long timeInSecond) {
