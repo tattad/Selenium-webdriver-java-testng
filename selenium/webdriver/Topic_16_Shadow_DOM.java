@@ -55,18 +55,23 @@ public class Topic_16_Shadow_DOM {
 
     @Test
     public void TC_02_Shadow_DOM_Shopee() {
-        driver.get("https://shopee.vn/");
+        driver.get("https://shopee.vn");
         sleepInSecond(5);
 
-        WebElement shadowHost = driver.findElement(By.cssSelector("shopee-banner-simple"));
+        WebElement shadowHost = driver.findElement(By.cssSelector("shopee-banner-popup-stateful"));
         SearchContext shadowRoot = shadowHost.getShadowRoot();
 
+        //2 TH có thể xảy ra
+        //Nếu có popup hiển thị thì close và qua step tiếp theo
+        //Nếu không có popup hiển thị thì qua step tiếp theo luôn
+
         //Verify pop hiển thị
-        if (shadowRoot.findElement(By.cssSelector("div.home.home-popup__content")).isDisplayed()) {
+        if (shadowRoot.findElements(By.cssSelector("div.home.home-popup__content")).size() > 0 && shadowRoot.findElements(By.cssSelector("div.home-popup__content")).get(0).isDisplayed()) {
             shadowRoot.findElement(By.cssSelector("div.home-popup__close-button")).click();
             sleepInSecond(2);
         }
 
+        //Không hiển thị/ đã bị đóng rồi qua step Search dữ liệu
         driver.findElement(By.xpath("//input[contains(@class,'shopee-searchbar')]")).sendKeys("Samsung S25 Ultra");
         sleepInSecond(2);
 
