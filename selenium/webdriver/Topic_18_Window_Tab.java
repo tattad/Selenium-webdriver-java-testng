@@ -3,6 +3,7 @@ package webdriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -24,33 +25,50 @@ public class Topic_18_Window_Tab {
     @Test
     public void TC_01_Basic_Form() {
         driver.get("https://automationfc.github.io/basic-form/index.html");
-
-        //Lấy ID của tab hiện tại
-        String parentID = driver.getWindowHandle();
+        sleepInSecond(2);
 
         driver.findElement(By.xpath("//a[text()='GOOGLE']")).click();
         sleepInSecond(2);
 
-        Set<String> allIDs = driver.getWindowHandles();
-
-        switchToWinDowTabById(parentID);
+        switchToWinDowTabByTitle("Google");
 
         driver.findElement(By.xpath("//textarea[@name='q']")).sendKeys("BStarSolutions");
-        String ggID = driver.getWindowHandle();
 
-        switchToWinDowTabById(ggID);
+        switchToWinDowTabByTitle("Selenium WebDriver");
 
         driver.findElement(By.xpath("//a[text()='FACEBOOK']")).click();
         sleepInSecond(2);
 
-        switchToWinDowTabByTitle("Facebook");
+        switchToWinDowTabByTitle("Facebook – log in or sign up");
 
-        driver.findElement(By.id("email")).sendKeys("abc");
+        driver.findElement(By.xpath("//input[@id='email']")).sendKeys("abc");
 
-//        driver.findElement(By.xpath("//a[text()='TIKI']")).click();
+        switchToWinDowTabByTitle("Selenium WebDriver");
+
+        driver.findElement(By.xpath("//a[text()='TIKI']")).click();
+        sleepInSecond(2);
+
+        switchToWinDowTabByTitle("Tiki - Mua hàng online giá tốt, hàng chuẩn, ship nhanh");
+
+        driver.findElement(By.xpath("//div[@title='Nhà Sách Tiki']")).click();
     }
 
-    public void TC_02() {
+    @Test
+    public void TC_02_KynaEnglish() {
+        driver.get("https://skills.kynaenglish.vn/");
+
+        driver.findElement(By.cssSelector("div.hotline img=[alt='facebook']")).click();
+        switchToWinDowTabByTitle("Kyna.vn | Ho Chi Minh | Facebook");
+
+        driver.findElement(By.cssSelector("form#login_popup_cta_form input[name='email']")).sendKeys("ahihi");
+
+        switchToWinDowTabByTitle("Kyna.vn - Học online cùng chuyên gia");
+
+        driver.findElement(By.cssSelector("div.hotline img=[alt='youtube']")).click();
+
+        switchToWinDowTabByTitle("Kyna.vn - YouTube");
+
+        Assert.assertEquals(driver.findElement(By.cssSelector("div#inner-header-container yt-formatted-string#text")).getText(),"Kyna.vn");
     }
 
     @AfterClass
