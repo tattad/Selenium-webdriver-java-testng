@@ -43,6 +43,10 @@ public class Topic_18_Window_Tab {
         driver.findElement(By.xpath("//a[text()='FACEBOOK']")).click();
         sleepInSecond(2);
 
+        switchToWinDowTabByTitle("Facebook");
+
+        driver.findElement(By.id("email")).sendKeys("abc");
+
 //        driver.findElement(By.xpath("//a[text()='TIKI']")).click();
     }
 
