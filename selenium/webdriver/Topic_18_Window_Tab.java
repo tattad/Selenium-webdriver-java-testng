@@ -46,7 +46,6 @@ public class Topic_18_Window_Tab {
 //        driver.findElement(By.xpath("//a[text()='TIKI']")).click();
     }
 
-    @Test
     public void TC_02() {
     }
 
