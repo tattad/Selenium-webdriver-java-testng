@@ -172,7 +172,7 @@ public class Topic_18_Window_Tab {
     public void TC_06_Havard() {
         driver.get("https://courses.dce.harvard.edu/");
 
-        driver.findElement(By.xpath("//div[@class='banner__auth']//a")).click();
+        driver.findElement(By.xpath("//a[@data-action='login']")).click();
 
         switchToWinDowTabByTitle("Harvard Division of Continuing Education Login Portal");
 
