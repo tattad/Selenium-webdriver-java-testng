@@ -20,8 +20,17 @@ public class Topic_21_Upload_File {
     }
 
     @Test
-    public void TC_01() {
+    public void TC_01_Single_File() {
         driver.get("https://blueimp.github.io/jQuery-File-Upload/");
+
+        //Window: \\
+        String filePath = "C:\\Users\\dat.tran\\Desktop\\kemda.jpg";
+
+        //Mac: / Volumn/Users/dat.tran/Desktop/kemda.jpg
+
+        //File này nằm ở đâu -> trong thư mục upload file
+
+        //Nếu máy khác dùng OS khác chạy được không?
     }
 
     @Test
