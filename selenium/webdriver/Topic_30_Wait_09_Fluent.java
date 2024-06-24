@@ -24,6 +24,9 @@ public class Topic_30_Wait_09_Fluent {
 
     FluentWait<String> fluentString;
 
+    private long fullTimeOutInSecond = 30;
+    private long pollingTimeOutInMiliSeconds =  300;
+
     @BeforeClass
     public void beforeClass() {
         driver = new FirefoxDriver();
@@ -72,13 +75,17 @@ public class Topic_30_Wait_09_Fluent {
     public void TC_01_() {
         driver.get("https://automationfc.github.io/dynamic-loading/");
 
-        driver.findElement(By.xpath("//div[@id='start']/button")).click();
+        waitAndFindElement(By.xpath("//div[@id='start']/button")).click();
+
+        String helloWorld = waitAndFindElement(By.xpath("//div[@id='finish']/h4")).getText();
+
+//        driver.findElement(By.xpath("//div[@id='start']/button")).click();
 
         //Chờ cho cái HelloWorld text hiển thịt trong vòng 10s
         //Setting
-        fluentDriver.withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofMillis(100))
-                .ignoring(NoSuchElementException.class);
+//        fluentDriver.withTimeout(Duration.ofSeconds(10))
+//                .pollingEvery(Duration.ofMillis(100))
+//                .ignoring(NoSuchElementException.class);
 
         //Condition
 //        fluentDriver.until(new Function<WebDriver, Boolean>() {
@@ -88,14 +95,14 @@ public class Topic_30_Wait_09_Fluent {
 //            }
 //        });
 
-        String helloWorld = fluentDriver.until(new Function<WebDriver, String>() {
-            @Override
-            public String apply(WebDriver webDriver) {
-                String text = driver.findElement(By.xpath("//div[@id='finish']/h4")).getText();
-                System.out.println("Get text: " + text);
-                return text;
-            }
-        });
+//        String helloWorld = fluentDriver.until(new Function<WebDriver, String>() {
+//            @Override
+//            public String apply(WebDriver webDriver) {
+//                String text = driver.findElement(By.xpath("//div[@id='finish']/h4")).getText();
+//                System.out.println("Get text: " + text);
+//                return text;
+//            }
+//        });
         Assert.assertEquals(helloWorld, "Hello World!");
     }
 
@@ -123,8 +130,8 @@ public class Topic_30_Wait_09_Fluent {
 
     public WebElement waitAndFindElement(By locator) {
         FluentWait<WebDriver> fluentDriver = new FluentWait<WebDriver>(driver);
-        fluentDriver.withTimeout(Duration.ofSeconds(10))
-                .pollingEvery(Duration.ofMillis(100))
+        fluentDriver.withTimeout(Duration.ofSeconds(fullTimeOutInSecond))
+                .pollingEvery(Duration.ofMillis(pollingTimeOutInMiliSeconds))
                 .ignoring(NoSuchElementException.class);
         fluentDriver.until(new Function<WebDriver, WebElement>() {
             @Override
