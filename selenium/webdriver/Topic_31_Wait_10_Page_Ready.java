@@ -38,6 +38,7 @@ public class Topic_31_Wait_10_Page_Ready {
         driver.findElement(By.xpath("//input[@id='Password']")).sendKeys("admin");
 
         driver.findElement(By.xpath("//button[text()='Log in']")).click();
+        sleepInSecond(2);
         Assert.assertTrue(isPageLoadedSuccess());
 
         explicitWait.until(ExpectedConditions.elementToBeClickable(By.xpath("//i[contains(@class,'fa-user')]/following-sibling::p"))).click();
@@ -47,10 +48,19 @@ public class Topic_31_Wait_10_Page_Ready {
         driver.findElement(By.xpath("//i[contains(@class,'fa-book')]/following-sibling::p")).click();
         driver.findElement(By.xpath("//ul[contains(@style,'display: block;')]//i[contains(@class,'fa-dot-circle')]/following-sibling::p[contains(string(),'Products')]")).click();
         Assert.assertTrue(isPageLoadedSuccess());
+
+        driver.findElement(By.xpath("//i[contains(@class,'fa-shopping-cart')]/following-sibling::p")).click();
+        driver.findElement(By.xpath("//ul[contains(@style,'display: block;')]//i[contains(@class,'fa-dot-circle')]/following-sibling::p[contains(string(),'Orders')]")).click();
+        Assert.assertTrue(isPageLoadedSuccess());
     }
 
     @Test
     public void TC_02_() {
+        driver.get("https://api.orangehrm.com/");
+
+        Assert.assertTrue(explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[@id='loader']/div[@class='spinner']"))));
+
+        Assert.assertTrue(driver.findElement(By.xpath("//h1[text()='OrangeHRM REST API Documentation']")).isDisplayed());
     }
 
     public boolean waitAjaxLoadingInvisible() {
@@ -86,5 +96,13 @@ public class Topic_31_Wait_10_Page_Ready {
     @AfterClass
     public void afterClass() {
         driver.quit();
+    }
+
+    public void sleepInSecond(long timeInSecond) {
+        try {
+            Thread.sleep(timeInSecond * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
