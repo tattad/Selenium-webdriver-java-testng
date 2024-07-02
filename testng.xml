@@ -1,20 +1,30 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-
 <suite name="Selenium Webdiver" verbose="1">
-    <groups>
-        <run>
-            <include name="order"/>
-        </run>
-    </groups>
+    <!--Global-->
+    <parameter name="environment" value="dev"></parameter>
 
     <test name="Run on Firefox browser">
-        <packages>
-            <package name="categories"></package>
-            <package name="orders"></package>
-            <package name="customers"></package>
-        </packages>
-<!--        <classes>-->
-<!--            <class name="testng.Topic_02_Annotations"/>-->
-<!--        </classes>-->
+        <!--Local-->
+        <parameter name="browser" value="firefox"></parameter>
+        <parameter name="version" value="127"></parameter>
+        <classes>
+            <class name="testng.Topic_09_Parameter"></class>
+        </classes>
+    </test>
+
+    <test name="Run on Chrome browser">
+        <parameter name="browser" value="chrome"></parameter>
+        <parameter name="version" value="126"></parameter>
+        <classes>
+            <class name="testng.Topic_09_Parameter"></class>
+        </classes>
+    </test>
+
+    <test name="Run on Edge browser">
+        <parameter name="browser" value="edge"></parameter>
+        <parameter name="version" value="126"></parameter>
+        <classes>
+            <class name="testng.Topic_09_Parameter"></class>
+        </classes>
     </test>
 </suite>
