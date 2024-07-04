@@ -7,10 +7,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -29,8 +26,8 @@ public class Topic_09_Parameter {
 
     @Parameters("environment")
     @Test
-    public void TC_01_Login(String environmentName) {
-        driver.get("http://live.techpanda.org/index.php/customer/account/login/");
+    public void TC_01_Login(@Optional("live") String environmentName) {
+        driver.get(getEnvironmentURL(environmentName) + "/index.php/customer/account/login/");
 
         driver.findElement(By.xpath("//*[@id='email']")).sendKeys("selenium_11_01@gmail.com");
         driver.findElement(By.xpath("//*[@id='pass']")).sendKeys("111111");
@@ -54,20 +51,20 @@ public class Topic_09_Parameter {
         return driver;
     }
 
-    private WebDriver getEnvironment(String environmentName) {
-        WebDriver driver;
-        if (environmentName.equals("firefox")) {
-            driver = new FirefoxDriver();
-        } else if (environmentName.equals("chrome")) {
-            driver = new ChromeDriver();
-        } else if (environmentName.equals("edge")) {
-            driver = new EdgeDriver();
-        } else if (environmentName.equals("ie")) {
-            driver = new InternetExplorerDriver();
+    private String getEnvironmentURL(String environmentName) {
+        String urlValue;
+        if (environmentName.equals("dev")) {
+            urlValue = "http://dev.techpanda.org";
+        } else if (environmentName.equals("testing")) {
+            urlValue = "http://testing.techpanda.org";
+        } else if (environmentName.equals("staging")) {
+            urlValue = "http://staging.techpanda.org";
+        } else if (environmentName.equals("live")) {
+            urlValue = "http://live.techpanda.org";
         } else {
-            throw new RuntimeException("Browser name is invalid");
+            throw new RuntimeException("Environment is invalid");
         }
-        return driver;
+        return urlValue;
     }
 
     @AfterClass
