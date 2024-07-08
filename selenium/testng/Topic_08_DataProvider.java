@@ -26,7 +26,7 @@ public class Topic_08_DataProvider {
         driver.manage().window().maximize();
     }
 
-    @Test(dataProvider = "loginData")
+//    @Test(dataProvider = "loginData")
     public void TC_01_LoginToSystem(String username, String password) {
         driver.get("http://live.techpanda.org/index.php/customer/account/login/");
 

@@ -16,7 +16,6 @@ public class Topic_01_Template {
     public void beforeClass() {
         driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-        driver.manage().window().maximize();
     }
 
     @Test
