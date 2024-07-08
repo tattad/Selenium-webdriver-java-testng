@@ -1,4 +1,4 @@
-package javaTester;
+package javaTester.javaDemoSelenium;
 
 public class Topic_09_Array {
 

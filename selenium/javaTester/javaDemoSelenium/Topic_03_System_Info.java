@@ -1,4 +1,4 @@
-package javaTester;
+package javaTester.javaDemoSelenium;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.Platform;

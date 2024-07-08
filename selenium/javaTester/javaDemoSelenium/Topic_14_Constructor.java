@@ -1,4 +1,4 @@
-package javaTester;
+package javaTester.javaDemoSelenium;
 
 public class Topic_14_Constructor {
     //Là 1 cái hàm cùng tên với class
