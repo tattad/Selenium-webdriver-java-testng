@@ -1,5 +1,8 @@
 package javaTester.javaBasic;
 
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+
 public class Topic_05_Reference_Casting {
     protected String studentName;
 
@@ -34,5 +37,9 @@ public class Topic_05_Reference_Casting {
 
         firstStudent.showStudentName();
         secondStudent.showStudentName();
+
+        WebDriver driver = null;
+
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
     }
 }
