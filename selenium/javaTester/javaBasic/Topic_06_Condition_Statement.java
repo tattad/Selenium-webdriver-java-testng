@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.Parameters;
@@ -71,13 +72,58 @@ public class Topic_06_Condition_Statement {
         }
     }
 
-    @Parameters("browser")
-    @Test
     public void TC_03_If_Else_If_Else(String browserName) {
+        //Có nhiều điều kiện
+        //Không nên if-else quá nhiều
+
         if (browserName.equalsIgnoreCase("chrome")) {
-
-        } else {
-
+            System.setProperty("webdriver.chrome.driver", projectPath + "\\browserDrivers\\chromedriver.exe");
+            driver = new ChromeDriver();
+        } else if (browserName.equalsIgnoreCase("firefox")) {
+            System.setProperty("webdriver.gecko.driver", projectPath + "\\browserDrivers\\geckodriver.exe");
+            driver = new FirefoxDriver();
+        } else if (browserName.equalsIgnoreCase("edge")) {
+            System.setProperty("webdriver.edge.driver", projectPath + "\\browserDrivers\\msedgedriver.exe");
+            driver = new EdgeDriver();
+        } else if (browserName.equalsIgnoreCase("ie")) {
+            System.setProperty("webdriver.ie.driver", projectPath + "\\browserDrivers\\IEDriverServer.exe");
+            driver = new EdgeDriver();
+        } else {//Safari/ Opera/ CocCoc/...
+            throw new RuntimeException("Please input correct the browser name!");
         }
+        System.out.println(browserName);
+        System.out.println(driver.toString());
+
+        driver.quit();
+    }
+
+    public void TC_04_If_Else_If_Else() {
+        //Page object
+        //Dynamic page
+
+        String pageName = "Login";
+
+        if (pageName.equals("Login")) {
+            //LoginPage loginPgae = new LoginPage();
+            //return loginPage;
+        } else if (pageName.equals("Register")) {
+            //RegisterPage registerPage = new RegisterPage();
+            //return registerPage;
+        } else if (pageName.equals("New Customer")) {
+            //CustomerPage customerPage = new CustomerPage();
+            //return customerPage;
+        } else {
+            //HomePage homePage = new HomePage();
+            //return homePage;
+        }
+
+        int age = 20;
+        String access = (age < 18) ? "You can not access" : "Welcome to our system!";
+        if (age < 18) {
+            access = "You can not access";
+        } else {
+            access = "Welcome to our system!";
+        }
+        System.out.println(access);
     }
 }
