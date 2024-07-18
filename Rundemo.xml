@@ -3,25 +3,25 @@
     <test name="Run on firefox">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="javaTester.javaBasic.Topic_06_Condition_Statement"/>
+            <class name="javaTester.javaBasic.Topic_07_Switch_Case"/>
         </classes>
     </test>
     <test name="Run on chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="javaTester.javaBasic.Topic_06_Condition_Statement"/>
+            <class name="javaTester.javaBasic.Topic_07_Switch_Case"/>
         </classes>
     </test>
     <test name="Run on edge">
         <parameter name="browser" value="edge"/>
         <classes>
-            <class name="javaTester.javaBasic.Topic_06_Condition_Statement"/>
+            <class name="javaTester.javaBasic.Topic_07_Switch_Case"/>
         </classes>
     </test>
     <test name="Run on IE">
         <parameter name="browser" value="ie"/>
         <classes>
-            <class name="javaTester.javaBasic.Topic_06_Condition_Statement"/>
+            <class name="javaTester.javaBasic.Topic_07_Switch_Case"/>
         </classes>
     </test>
 </suite>
