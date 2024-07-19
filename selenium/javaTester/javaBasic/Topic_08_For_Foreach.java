@@ -27,4 +27,33 @@ public class Topic_08_For_Foreach {
             System.out.println(cityName[i]);
         }
     }
+
+    @Test
+    public void TC_02_For_Each() {
+        String[] cityName = {"Ha Noi", "Ho Chi Minh", "Da Nang", "Can Tho", "Hai Phong", "Khanh Hoa"};
+
+        List<String> cityAddress = new ArrayList<String>();
+        System.out.println(cityAddress.size());
+
+        cityAddress.add("Bac Giang");
+        cityAddress.add("Ha Giang");
+        cityAddress.add("Sa Pa");
+
+        System.out.println(cityAddress.size());
+
+        for (String city : cityName) {
+            cityAddress.add(city);
+        }
+
+        System.out.println(cityAddress.size());
+
+        for (String cityAdd : cityAddress) {
+            System.out.println(cityAdd);
+        }
+
+        List<WebElement> buttons = driver.findElements(By.xpath(""));
+        for (WebElement webElement : buttons) {
+
+        }
+    }
 }
